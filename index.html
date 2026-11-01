@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAMA BURGER | Premium & Fresh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-panel: #111111;
+            --accent: #ffb703; /* Warm Yellowish Golden */
+            --accent-hover: #ffd166; /* Bright Gold Hover */
+            --text-main: #ffffff;
+            --text-bright: #f5f5f5;
+            --text-footer: #a0a0a0; 
+            --glass-bg: rgba(15, 15, 15, 0.85);
+            --glass-border: rgba(255, 183, 3, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            text-transform: uppercase;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .text-accent { color: var(--accent); }
+
+        /* --- FINE-TUNED SLOW/ELEGANT SCROLL ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Balanced stagger delays for grids */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
+
+        /* --- GRADIENT TEXT SHIMMER TITLE EFFECTS --- */
+        .title-shimmer-white {
+            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title-shimmer-black {
+            background: linear-gradient(180deg, #111111 0%, #444444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title-shimmer-gold {
+            background: linear-gradient(180deg, #ffd166 0%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title-shimmer-dark-gold {
+            background: linear-gradient(180deg, #000000 0%, #3a2500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- FROSTED GLASS NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.35s ease-in-out;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+        
+        .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 2.5px; color: var(--text-main); }
+        
+        .nav-search { 
+            color: var(--accent); 
+            font-size: 1.35rem; 
+            cursor: pointer; 
+            transition: transform 0.2s ease, color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 183, 3, 0.08);
+            border: 1px solid rgba(255, 183, 3, 0.25);
+        }
+
+        .nav-search:hover {
+            color: #ffffff;
+            background: var(--accent);
+            transform: scale(1.08) rotate(90deg);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, var(--bg-dark) 0%, rgba(5,5,5,0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 { font-size: clamp(4rem, 12vw, 8rem); margin-bottom: 1rem; letter-spacing: -2px; }
+        .hero p { font-size: 1.25rem; max-width: 600px; color: var(--text-bright); margin-bottom: 2rem; line-height: 1.6; font-weight: 600; }
+
+        /* --- MARQUEE TICKER --- */
+        .marquee {
+            background: var(--accent);
+            color: #000000;
+            padding: 1rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+        }
+
+        .marquee-content {
+            font-weight: 900;
+            font-size: 1.5rem;
+            animation: scrollText 20s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- THE BAMA STORY SECTION --- */
+        .story-section {
+            padding: 9rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #ffffff;
+            color: #000000;
+            position: relative;
+            z-index: 5;
+        }
+
+        .story-section h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .story-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #111111; 
+            margin-bottom: 1.8rem;
+            font-weight: 500;
+        }
+
+        .story-highlight {
+            font-size: 1.35rem !important;
+            font-weight: 900 !important;
+            color: #d89e1b !important;
+            margin-top: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        /* --- EXPLODED BURGER (WHAT MAKES A BAMA?) --- */
+        .exploded-section {
+            padding: 8rem 2rem;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .exploded-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .layer-title-wrapper {
+            margin-bottom: 3.5rem;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .layer-title-box {
+            display: inline-block;
+            background: #ffffff; 
+            color: #000000; 
+            padding: 1.8rem 2.5rem;
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .layer-title-box h2 {
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 0.4rem;
+            letter-spacing: -1px;
+        }
+
+        .layer-title-box p {
+            color: #000000;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-transform: none;
+        }
+
+        .exploded-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        @media(min-width: 900px) {
+            .exploded-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .exploded-visual {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .exploded-visual:hover {
+            transform: scale(1.02);
+        }
+
+        .layers-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .layer-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .layer-item:hover {
+            transform: translateX(10px);
+        }
+
+        .layer-item h3 { font-size: 1.4rem; color: var(--accent); margin-bottom: 0.4rem; }
+        .layer-item p { color: #d1d1d1; font-size: 1.05rem; font-weight: 400; }
+
+        .editorial-price-block {
+            margin-top: 3.5rem;
+            background: var(--accent);
+            padding: 2.2rem;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 15px 35px rgba(255, 183, 3, 0.15);
+        }
+
+        .editorial-price-title {
+            color: #000000;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        /* --- SAUCE PALETTE SECTION --- */
+        .sauces-palette-section {
+            padding: 9rem 2rem 10rem;
+            background: #ffffff;
+            color: #000000;
+            text-align: center;
+            position: relative;
+        }
+
+        .palette-header-wrapper {
+            margin-bottom: 5.5rem;
+        }
+
+        .sauces-palette-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            letter-spacing: -1px;
+            font-weight: 900;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 4rem 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sauce-tub-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            animation: floatSauce 4s ease-in-out infinite;
+        }
+        .sauce-tub-item:nth-child(2) { animation-delay: 1s; }
+        .sauce-tub-item:nth-child(3) { animation-delay: 2s; }
+        .sauce-tub-item:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes floatSauce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .tub-label-text {
+            font-size: 1.15rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000000;
+            margin-bottom: 1.8rem;
+            text-align: center;
+            line-height: 1.2;
+            transition: color 0.3s;
+        }
+
+        .tub-container {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #333333 0%, #111111 100%);
+            border: 5px solid #222222;
+            padding: 8px;
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18), 
+                        inset 0 6px 12px rgba(0,0,0,0.6),
+                        0 0 0 2px rgba(255,255,255,0.8);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s;
+        }
+
+        .sauce-tub-item:hover .tub-container {
+            transform: scale(1.15) translateY(-10px) rotate(5deg);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.25), 
+                        inset 0 4px 8px rgba(0,0,0,0.4),
+                        0 0 0 3px #d89e1b;
+        }
+
+        .sauce-tub-item:hover .tub-label-text {
+            color: #d89e1b;
+        }
+
+        .sauce-fill {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 8px 16px rgba(0,0,0,0.45), 
+                        inset 0 -6px 12px rgba(255,255,255,0.3);
+            overflow: hidden;
+        }
+
+        .sauce-fill::before {
+            content: '';
+            position: absolute;
+            top: 12%;
+            left: 20%;
+            width: 40%;
+            height: 25%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            filter: blur(3px);
+            transform: rotate(-30deg);
+        }
+
+        .sauce-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-repeat: no-repeat;
+            opacity: 0.65;
+            mix-blend-mode: overlay;
+        }
+
+        .fill-base { background: radial-gradient(circle at 40% 40%, #ffe999 0%, #f4b41a 65%, #c68600 100%); }
+        .fill-base::after {
+            background-image: radial-gradient(circle at 55% 55%, rgba(0,0,0,0.35) 3px, transparent 4px),
+                              radial-gradient(circle at 30% 70%, rgba(255,255,255,0.6) 2px, transparent 3px);
+            background-size: 35px 35px, 25px 25px;
+        }
+
+        .fill-garlic { background: radial-gradient(circle at 40% 40%, #ffffff 0%, #e8e4d3 65%, #cbc3ab 100%); }
+        .fill-garlic::after {
+            background-image: radial-gradient(circle at 45% 45%, #2d4c1e 1.5px, transparent 2px),
+                              radial-gradient(circle at 75% 65%, #2d4c1e 1.5px, transparent 2px);
+            background-size: 20px 20px, 30px 30px;
+        }
+
+        .fill-bama { background: radial-gradient(circle at 40% 40%, #ffbd59 0%, #d86900 60%, #8c3b00 100%); }
+        .fill-bama::after {
+            background-image: radial-gradient(ellipse at 50% 50%, rgba(50,10,0,0.5) 10px, transparent 18px),
+                              radial-gradient(circle at 25% 30%, rgba(255,255,255,0.4) 4px, transparent 8px);
+            background-size: 45px 45px, 30px 30px;
+        }
+
+        .fill-spicy { background: radial-gradient(circle at 40% 40%, #ff6b6b 0%, #d62828 65%, #780000 100%); }
+        .fill-spicy::after {
+            background-image: radial-gradient(circle at 35% 45%, #3a0000 2px, transparent 3px),
+                              radial-gradient(circle at 65% 55%, #1a0000 2.5px, transparent 3.5px);
+            background-size: 22px 22px, 32px 32px;
+        }
+
+        .tub-description {
+            margin-top: 1.8rem;
+            font-size: 0.98rem;
+            color: #000000;
+            font-weight: 700;
+            max-width: 180px;
+            line-height: 1.5;
+        }
+
+        /* --- DRAMATIC LAUNCH MENU SHOWCASE SECTION --- */
+        .launch-menu-section {
+            padding: 8rem 2rem;
+            background: radial-gradient(circle at top center, #1a1a1a 0%, #050505 80%);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .launch-menu-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .launch-menu-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .launch-menu-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .launch-menu-header p {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .launch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            perspective: 1000px;
+        }
+
+        .launch-card {
+            background: rgba(18, 18, 18, 0.85);
+            border: 1px solid rgba(255, 183, 3, 0.2);
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        border-color 0.4s ease, 
+                        box-shadow 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .launch-card:hover {
+            transform: translateY(-12px) rotateX(4deg) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(255, 183, 3, 0.25), 0 0 20px rgba(255, 183, 3, 0.15);
+        }
+
+        .launch-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.12) 50%,
+                transparent 70%
+            );
+            transform: rotate(30deg);
+            transition: transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        .launch-card:hover::after {
+            transform: rotate(30deg) translate(30%, 30%);
+        }
+
+        /* UPDATED: Displays full images without cropping */
+        .card-img-placeholder {
+            width: 100%;
+            height: 240px;
+            background: #0f0f0f;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+        }
+
+        .card-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .launch-card:hover .card-img-placeholder img {
+            transform: scale(1.08);
+        }
+
+        .card-img-placeholder .placeholder-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(18,18,18,1) 0%, rgba(18,18,18,0) 60%);
+            pointer-events: none;
+        }
+
+        .launch-card-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .launch-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .launch-card .price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .launch-card p {
+            color: #b0b0b0;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            margin-bottom: 1.8rem;
+        }
+
+        .launch-badge-highlight {
+            background: rgba(255, 183, 3, 0.08);
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem 1rem;
+            font-size: 0.88rem;
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 0 8px 8px 0;
+            margin-top: auto;
+        }
+
+        .launch-card.hero-featured {
+            border-color: var(--accent);
+            background: linear-gradient(145deg, rgba(30, 25, 10, 0.9) 0%, rgba(15, 15, 15, 0.95) 100%);
+        }
+
+        /* --- WHY BAMA SECTION --- */
+        .why-section {
+            padding: 8rem 2rem;
+            background: var(--accent);
+            color: #000000;
+            text-align: center;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .why-card {
+            padding: 3rem 2rem;
+            background: #000000;
+            color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .why-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .why-card i {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .why-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .why-card h4 { 
+            margin-bottom: 1rem; 
+            font-size: 1.2rem; 
+            color: var(--accent);
+        }
+
+        .why-card p {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* --- SOCIAL GRID --- */
+        .social-section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 183, 3, 0.1);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link-icon:hover {
+            background: var(--accent);
+            color: #000000;
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .landscape-post {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        .landscape-post:hover {
+            transform: scale(1.01);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            background: var(--bg-panel);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-title {
+            font-size: 2.5rem; 
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-tagline {
+            color: var(--accent); 
+            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .footer-bottom-text {
+            color: var(--text-footer); 
+            font-size: 0.95rem; 
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #000000;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 50px;
+            display: inline-block;
+            text-transform: uppercase;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover { 
+            background: var(--accent-hover); 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 183, 3, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- FROSTED GLASS NAVIGATION -->
+    <nav id="navbar">
+        <div class="logo">BAMA</div>
+        <div class="nav-search" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <h1 class="title-shimmer-white">THAT'S BAMA.</h1>
+            <p style="font-size: 1.2rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase;">Born from a name. Inspired by Alabama. Made our way.</p>
+            <p>Handcrafted chicken and beef burgers made with our own signature patties, house-developed sauces, caramelised onions and fresh ingredients.</p>
+            <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--accent); margin-top: 1.5rem;">
+                Opening 1 November 2026<br>
+                <span style="font-size: 1.1rem; font-style: normal; font-family: 'Montserrat', sans-serif; color: #ffffff; font-weight: 700;">Food Republic • Pavilion Bukit Bintang</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="marquee">
+        <div class="marquee-content">
+            CRAFTED FRESH. OUR PATTY. OUR SAUCE. OUR TASTE. &nbsp; • &nbsp; BAMA CHEESEBURGER FROM RM13.90 &nbsp; • &nbsp; CRAFTED FRESH. OUR PATTY. OUR SAUCE. OUR TASTE. &nbsp; • &nbsp; BAMA CHEESEBURGER FROM RM13.90 &nbsp; • &nbsp;
+        </div>
+    </div>
+
+    <!-- THE BAMA STORY -->
+    <section class="story-section">
+        <div class="reveal">
+            <h2 class="title-shimmer-black">IT STARTED WITH A NAME.</h2>
+            <p>When we first talked about creating our own burger concept, the name BAMA somehow led us to Alabama. That little connection made us curious. We discovered Alabama's distinctive burger culture and how a signature sauce could give a burger an identity of its own. That idea stayed with us.</p>
+            <p>So we started experimenting - developing our own chicken and beef patties, our own seasonings and, most importantly, our own BAMA sauces. After testing, tasting and adjusting, the flavour became ours.</p>
+            <p class="story-highlight">Fresh ingredients. Our own patties. Our own sauces. Our own flavour. That's Bama.</p>
+        </div>
+    </section>
+
+    <!-- EXPLODED BURGER (WHAT MAKES A BAMA?) -->
+    <section class="exploded-section">
+        <div class="exploded-container">
+            <div class="layer-title-wrapper reveal">
+                <div class="layer-title-box">
+                    <h2 class="title-shimmer-black">WHAT MAKES A BAMA?</h2>
+                    <p>The exact layer order of the real BAMA Cheeseburger.</p>
+                </div>
+            </div>
+
+            <div class="exploded-grid">
+                <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/SECTION_2_-_SIGNATURE_BURGER_LAYERS.png?v=1789733694" alt="Signature Burger Layers" class="exploded-visual reveal-left">
+                
+                <div class="layers-info reveal-right">
+                    <div class="layer-item">
+                        <h3>1. TOASTED TOP BUN</h3>
+                        <p>Soft toasted perfection to hold it all together.</p>
+                    </div>
+                    <div class="layer-item">
+                        <h3>2. BASE SAUCE</h3>
+                        <p>The first BAMA layer.</p>
+                    </div>
+                    <div class="layer-item">
+                        <h3>3. CRISP LETTUCE</h3>
+                        <p>Fresh crunch in every bite.</p>
+                    </div>
+                    <div class="layer-item">
+                        <h3>4. FRESH TOMATO</h3>
+                        <p>Crisp, fresh-cut daily slices.</p>
+                    </div>
+                    <div class="layer-item">
+                        <h3>5. MELTED CHEESE</h3>
+                        <p>A warm, creamy, savory layer.</p>
+                    </div>
+                    <div class="layer-item">
+                        <h3 class="text-accent">6. BAMA SIGNATURE PATTY</h3>
+                        <p>Handcrafted our way • Chicken or Beef.</p>
+                    </div>
+                    <div class="layer-item">
+                        <h3>7. CARAMELISED ONIONS</h3>
+                        <p>Slow-cooked sweetness for the ultimate flavor profile.</p>
+                    </div>
+                    <div class="layer-item" style="border: none;">
+                        <h3>8. TOASTED BOTTOM BUN</h3>
+                        <p>The foundation of the build.</p>
+                    </div>
+
+                    <div class="editorial-price-block">
+                        <h2 class="editorial-price-title">OUR PATTY. OUR SAUCE.<br>OUR TASTE. THAT'S BAMA.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHOOSE YOUR SAUCE - PALETTE -->
+    <section class="sauces-palette-section">
+        <div class="palette-header-wrapper reveal">
+            <h2 class="title-shimmer-black">CHOOSE YOUR BAMA SAUCE</h2>
+        </div>
+        
+        <div class="palette-grid">
+            <!-- Base Sauce Tub -->
+            <div class="sauce-tub-item reveal delay-1">
+                <div class="tub-label-text">Base Sauce</div>
+                <div class="tub-container">
+                    <div class="sauce-fill fill-base"></div>
+                </div>
+                <div class="tub-description">The classic foundation</div>
+            </div>
+
+            <!-- Garlic Sauce Tub -->
+            <div class="sauce-tub-item reveal delay-2">
+                <div class="tub-label-text">Garlic Sauce</div>
+                <div class="tub-container">
+                    <div class="sauce-fill fill-garlic"></div>
+                </div>
+                <div class="tub-description">Creamy garlic flavour</div>
+            </div>
+
+            <!-- BAMA Sauce Tub -->
+            <div class="sauce-tub-item reveal delay-3">
+                <div class="tub-label-text">BAMA Sauce</div>
+                <div class="tub-container">
+                    <div class="sauce-fill fill-bama"></div>
+                </div>
+                <div class="tub-description">Our house-developed signature flavour</div>
+            </div>
+
+            <!-- Spicy Sauce Tub -->
+            <div class="sauce-tub-item reveal delay-4">
+                <div class="tub-label-text">Spicy Sauce</div>
+                <div class="tub-container">
+                    <div class="sauce-fill fill-spicy"></div>
+                </div>
+                <div class="tub-description">For those who like a little heat</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DRAMATIC LAUNCH MENU SHOWCASE SECTION -->
+    <section class="launch-menu-section">
+        <div class="launch-menu-container">
+            <div class="launch-menu-header reveal">
+                <h2 class="title-shimmer-white">LAUNCH MENU SHOWCASE</h2>
+                <p>Taste the Difference • Pavilion Bukit Bintang</p>
+            </div>
+            
+            <div class="launch-grid">
+                <!-- 1. BAMA Cheeseburger -->
+                <div class="launch-card hero-featured reveal delay-1">
+                    <div class="card-img-placeholder">
+                        <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/Cheese_burger.png?v=1792218850" alt="BAMA Cheeseburger">
+                        <div class="placeholder-overlay"></div>
+                    </div>
+                    <div class="launch-card-body">
+                        <div>
+                            <h3>BAMA Cheeseburger</h3>
+                            <div class="price">Chicken • RM13.90</div>
+                            <p>Handcrafted patty with melted cheese, caramelised onions, fresh tomato, crisp lettuce, and signature BAMA sauce.</p>
+                        </div>
+                        <div class="launch-badge-highlight">Available in Chicken & Beef</div>
+                    </div>
+                </div>
+
+                <!-- 2. BAMA Double Double -->
+                <div class="launch-card reveal delay-2">
+                    <div class="card-img-placeholder">
+                        <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/Bama_double_double.png?v=1792218850" alt="BAMA Double Double">
+                        <div class="placeholder-overlay"></div>
+                    </div>
+                    <div class="launch-card-body">
+                        <div>
+                            <h3>BAMA Double Double</h3>
+                            <div class="price">Signature Range</div>
+                            <p>Stacked for extreme hunger: double patties, double melted cheese, and extra caramelised onions.</p>
+                        </div>
+                        <div class="launch-badge-highlight">Maximum savory richness</div>
+                    </div>
+                </div>
+
+                <!-- 3. BAMA Double Decker -->
+                <div class="launch-card reveal delay-3">
+                    <div class="card-img-placeholder">
+                        <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/Bama_double_decker.png?v=1792218850" alt="BAMA Double Decker">
+                        <div class="placeholder-overlay"></div>
+                    </div>
+                    <div class="launch-card-body">
+                        <div>
+                            <h3>BAMA Double Decker</h3>
+                            <div class="price">Signature Range</div>
+                            <p>Our tall architectural icon designed for the ultimate social moment and big appetite visual thrill.</p>
+                        </div>
+                        <div class="launch-badge-highlight">Social media favorite</div>
+                    </div>
+                </div>
+
+                <!-- 4. Jungle Nacho -->
+                <div class="launch-card reveal delay-1">
+                    <div class="card-img-placeholder">
+                        <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/IMG_2968.jpg?v=1793248848" alt="Jungle Nacho">
+                        <div class="placeholder-overlay"></div>
+                    </div>
+                    <div class="launch-card-body">
+                        <div>
+                            <h3>Nacho Set with Fries Combo</h3>
+                            <div class="price">Loaded Side</div>
+                            <p>Crispy tortilla chips topped with rich cheese sauce, sweet caramelised onions, and BAMA sauce drizzle.</p>
+                        </div>
+                        <div class="launch-badge-highlight">Loaded sauce presentation</div>
+                    </div>
+                </div>
+
+                <!-- 5. BAMA Combo -->
+                <div class="launch-card reveal delay-2" style="border-color: var(--accent);">
+                    <div class="card-img-placeholder">
+                        <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/Bama_combo.png?v=1792218850" alt="BAMA Combo">
+                        <div class="placeholder-overlay"></div>
+                    </div>
+                    <div class="launch-card-body">
+                        <div>
+                            <h3 style="color: var(--accent);">BAMA Combo</h3>
+                            <div class="price">Add-on Set</div>
+                            <p>Complete your burger with crispy fries and a cold drink for the full BAMA in-store experience.</p>
+                        </div>
+                        <div class="launch-badge-highlight" style="background: var(--accent); color: #000000; font-weight: 800;">Best Value In-Store Upgrade</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY BAMA -->
+    <section class="why-section">
+        <h2 style="font-size: 3rem;" class="reveal title-shimmer-dark-gold">MADE DIFFERENTLY.</h2>
+        <div class="why-grid">
+            <div class="why-card reveal delay-1">
+                <i class="fa-solid fa-drumstick-bite"></i>
+                <h4>OUR PATTY</h4>
+                <p>Own recipe and seasoning.</p>
+            </div>
+            <div class="why-card reveal delay-2">
+                <i class="fa-solid fa-bottle-droplet"></i>
+                <h4>OUR SAUCE</h4>
+                <p>Signature BAMA flavour.</p>
+            </div>
+            <div class="why-card reveal delay-3">
+                <i class="fa-solid fa-leaf"></i>
+                <h4>FRESH INGREDIENTS</h4>
+                <p>Fresh layers in every burger.</p>
+            </div>
+            <div class="why-card reveal delay-4">
+                <i class="fa-solid fa-circle-check"></i>
+                <h4>MADE TO ORDER</h4>
+                <p>Hot and freshly assembled.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL JOURNEY SECTION -->
+    <section class="social-section">
+        <div class="social-header reveal">
+            <div>
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;" class="title-shimmer-black">BAMA IS COMING.</h2>
+                <p style="color: #000000; font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Follow the journey from recipe testing and kitchen preparation to the first BAMA served.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link-icon" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link-icon" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-link-icon" title="RedNote"><i class="fa-solid fa-r"></i></a>
+                </div>
+            </div>
+            <div>
+                <a href="#" class="btn">FOLLOW @BAMABURGER</a>
+            </div>
+        </div>
+
+        <img src="https://cdn.shopify.com/s/files/1/0953/8391/2739/files/SECTION_5_-_OPENING_SOCIAL.png?v=1789733694" alt="BAMA Journey" class="landscape-post reveal">
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="reveal">
+        <h2 class="footer-title title-shimmer-gold">BAMA BURGER</h2>
+        <p class="footer-tagline">Our Patty. Our Sauce. Our Taste. That’s BAMA.</p>
+        <div class="footer-bottom-text">
+            <p>Food Republic • Pavilion Bukit Bintang, Kuala Lumpur</p>
+            <p>Operated by KODIAKI SDN BHD (registration in progress)</p>
+        </div>
+    </footer>
+
+    <!-- SMOOTH SCROLL OBSERVER & NAV HIDE -->
+    <script>
+        let lastScrollY = window.scrollY;
+        const nav = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+
+        // Intersection Observer for controlled, gentle scroll reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
